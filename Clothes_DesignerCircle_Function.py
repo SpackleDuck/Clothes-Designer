@@ -2,9 +2,14 @@ import tkinter
 
 
 root = tkinter.Tk()
+root.wm_title('Clothes Designer')
+
 shapes = []
 canvas = tkinter.Canvas(root, width=1080, height=720, background='#FFFFFF')
 canvas.grid(row=0,rowspan=2, column=1)
+editor = tkinter.Text(root, width=10)
+editor.grid(column=2, row=0, rowspan=3)
+
 def down(event):
     global startx, starty
     startx = event.x 
