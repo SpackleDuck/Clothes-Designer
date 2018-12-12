@@ -3,7 +3,7 @@ import tkinter
 
 root = tkinter.Tk()
 shapes = []
-canvas = tkinter.Canvas(root, width=300, height=300, background='#FFFFFF')
+canvas = tkinter.Canvas(root, width=600, height=600, background='#FFFFFF')
 canvas.grid(row=0,rowspan=2, column=1)
 def down(event):
     global startx, starty
