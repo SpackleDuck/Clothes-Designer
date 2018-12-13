@@ -3,16 +3,16 @@ import tkinter
 
 root = tkinter.Tk()
 shapes = []
-canvas = tkinter.Canvas(root, width=300, height=300, background='#FFFFFF')
+canvas = tkinter.Canvas(root, width=1080, height=720, background='#FFFFFF')
 canvas.grid(row=0,rowspan=2, column=1)
 option = tkinter.IntVar()
 
 shape =tkinter.Radiobutton(root, variable=option,
                         text='click for circle', value=0)
-shape.grid(row=2,column=2)
+shape.grid(row=1,column=2)
 shape2 =tkinter.Radiobutton(root, variable=option,
                     text='click for rectangle', value=1) 
-shape2.grid(row=1,column=2)
+shape2.grid(row=0,column=2)
 option.set(0)
 
 def down(event):
