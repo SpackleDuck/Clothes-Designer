@@ -1,26 +1,35 @@
+
 import tkinter
-
-
+import os.path
+import PIL.Image, PIL.ImageTk
 root = tkinter.Tk()
-root.wm_title('Clothes Designer')
-
 shapes = []
 canvas = tkinter.Canvas(root, width=1080, height=720, background='#FFFFFF')
 canvas.grid(row=0,rowspan=2, column=1)
-editor = tkinter.Text(root, width=10)
-editor.grid(column=2, row=0, rowspan=3)
+option = tkinter.IntVar()
+directory = os.path.dirname(os.path.abspath(__file__))
+filename = os.path.join(directory, 'shirt.png')
+img = PIL.Image.open(filename) # create a PIL.Image from the jpg file
+tkimg = PIL.ImageTk.PhotoImage(img) 
+filename2 = os.path.join(directory, 'stick.jpg')
+img2 = PIL.Image.open(filename2)
+tkimg2 = PIL.ImageTk.PhotoImage(img2)
+image_item = canvas.create_image(540,375, image=tkimg2)
 
-rotation_slider = tkinter.IntVar()
-rotation_slider.set(0)
-#class RotationSlider(tkinter.Scale):
- #       def __init__(self, parent, myLabel, model_intvar, editor, canvas):
-  #          def slider_changed(newval):
-    #                tk_rotation = rotation_slider
-   #                 editor.insert(tkinter.END, tk_rotation+'\n')
-     #               editor.see(tkinter.END)
-      #              canvas.itemconfig(shapes[-1],fill=tk_rotation)
-       #             tkinter.Scale.__init__(self, parent, orient=tkinter.HORIZONTAL, from_=0, to=255,
-        #                        variable=model_intvar, label=myLabel, command=slider_changed)
+
+
+
+shape =tkinter.Radiobutton(root, variable=option,
+                        text='click for circle', value=0)
+shape.grid(row=1,column=2)
+shape2 =tkinter.Radiobutton(root, variable=option,
+                    text='click for rectangle', value=1) 
+shape2.grid(row=0,column=2)
+shape3 =tkinter.Radiobutton(root, variable=option,
+                    text='click for shirt', value=2) 
+shape3.grid(row=0,columnspan=2,column=3)
+option.set(0)
+
 def down(event):
     global startx, starty
     startx = event.x 
@@ -28,11 +37,19 @@ def down(event):
 
 def up(event):
     r = (startx-event.x)**2 + (starty-event.y)**2 
-    r = int(r**.5)                               
-    new_shape = canvas.create_oval(startx-r, starty-r, startx+r, starty+r,
-                                     outline='#000000', width = 10)
+    r = int(r**.5)
+    if option.get() == 0: 
+        new_shape = canvas.create_oval(startx-r, starty-r, startx+r, starty+r,
+                                     outline='#000000')
+    elif option.get() == 1:
+        new_shape = canvas.create_rectangle(startx-r, starty-r, startx+r, starty+r,
+                                     outline='#000000')
+    elif option.get() ==2:
+        new_shape = canvas.create_image(540,360,image=tkimg)
     shapes.append(new_shape)
 canvas.bind('<Button-1>', down)
 canvas.bind('<ButtonRelease-1>', up)
 
 root.mainloop()
+
+
