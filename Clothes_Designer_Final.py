@@ -61,7 +61,7 @@ blue_slider.grid(row=2, column=0, sticky=tkinter.W)
 
 
 
-
+#this creates the buttons to change what shape you wish to create
 shape =tkinter.Radiobutton(root, variable=option,
                         text='click for circle', value=0)
 shape.grid(rowspan=3,columnspan=2)
@@ -92,6 +92,7 @@ def up(event):
     tk_color_string = color(red_intvar, green_intvar, blue_intvar)
     r = (startx-event.x)**2 + (starty-event.y)**2 
     r = int(r**.5)
+    #these option elifs determine which shape will be put down, and where, for instance the shirt and pants will go on the stick figure, while the circle and square will go where the user chooses
     if option.get() == 0: 
         new_shape = canvas.create_oval(startx-r, starty-r, startx+r, starty+r,
                                      outline='#000000')
@@ -109,7 +110,7 @@ def up(event):
     elif option.get() ==4:
         canvas.delete('one', 'two', 'three', 'four')   
     shapes.append(new_shape)
-
+#binds the button for placing shapes to M1
 canvas.bind('<Button-1>', down)
 canvas.bind('<ButtonRelease-1>', up)
 
