@@ -75,6 +75,10 @@ shape3.grid(rowspan=3,columnspan=2)
 shape4 =tkinter.Radiobutton(root, variable=option,
                     text='click for pants', value=3) 
 shape4.grid(rowspan=3,columnspan=2)
+
+shape5 =tkinter.Radiobutton(root, variable=option, 
+                    text = 'click to clear', value =4) 
+shape5.grid(rowspan=3,columnspan =2)
 option.set(0)
 option.set(0)
 
@@ -91,14 +95,21 @@ def up(event):
     if option.get() == 0: 
         new_shape = canvas.create_oval(startx-r, starty-r, startx+r, starty+r,
                                      outline='#000000')
+        canvas.itemconfig(new_shape, tag="one")
     elif option.get() == 1:
         new_shape = canvas.create_rectangle(startx-r, starty-r, startx+r, starty+r,
                                      outline='#000000')
+        canvas.itemconfig(new_shape, tag="two")
     elif option.get() ==2:
         new_shape = canvas.create_polygon(510,490,570,490,570,300,620,400,650,350,580,265,505,265,440,350,470,400,510,300,outline='#000000',width=5)
+        canvas.itemconfig(new_shape, tag="three")
     elif option.get() ==3:
         new_shape= canvas.create_polygon(510,490,420,645,445,655,540,530,630,655,655,645,570,490)
+        canvas.itemconfig(new_shape, tag="four")
+    elif option.get() ==4:
+        canvas.delete('one', 'two', 'three', 'four')   
     shapes.append(new_shape)
+
 canvas.bind('<Button-1>', down)
 canvas.bind('<ButtonRelease-1>', up)
 
